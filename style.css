@@ -49,17 +49,18 @@
   }
   
   .text{
-    left: 276px;
+    left: 60px;
+    margin-top: 30px;
     white-space: nowrap;
     position: absolute;
     text-align: center;
-    bottom: -300px;
+    bottom: -350px;
 
   }
 
   .card-container {
     perspective: 1000px;
-   
+    margin-top: 20px;
   }
   
   .card-container, .front, .back {
@@ -106,28 +107,35 @@
   .back {
     transform: rotateY(180deg);
   }
+  .image-row-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Adjust to the width of the parent or specific value */
+    height: 200px; /* Adjust based on the height of the images */
+  }
+  
   .image-row {
-    display: flex; /* Enables Flexbox */
-    justify-content: space-around; /* Distributes space around items */
-    align-items: center; /* Aligns items vertically */
-    animation: 1s ease-in-out 0s 1 slideInFromLeft;
-    /* animation: scrollRight 20s linear infinite; */
-}
-
-.image-row img {
-    width: 70%; /* Sets the width of each image */
-    height: auto; /* Maintains the aspect ratio of images */
-    animation: moveRight 3s linear infinite;
-}
-
-@keyframes moveRight {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 100%; /* Ensure row height matches container for vertical alignment */
+    animation: moveRight 10s linear infinite;
+  }
+  
+  .image-row img {
+    width: 50px; /* Adjust to ensure multiple images fit within the viewport */
+    height: auto;
+  }
+  
+  @keyframes moveRight {
     0% {
-        transform: translateX(-100%);
+      transform: translateX(-100%);
     }
     100% {
-        transform: translateX(100%);
+      transform: translateX(100%);
     }
-}
+  }
+    
 
 @keyframes scrollRight {
     0% {
@@ -136,4 +144,24 @@
     100% {
         transform: translateX(-50%); /* Moves left the width of one set of images */
     }
+}
+
+.eye img {
+  /* Animation */
+  animation: tiltBounce 3s ease-in-out infinite;
+}
+
+@keyframes tiltBounce {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(20px) rotate(20deg);
+  }
+  50% {
+    transform: translateX(0px) rotate(-20deg);
+  }
+  75% {
+    transform: translateX(20px) rotate(20deg);
+  }
 }

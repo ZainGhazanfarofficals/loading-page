@@ -7,17 +7,17 @@ const mouth = document.querySelector('.mouth');
 const cloak = document.querySelector('.cloak');
 
 const timeline = new TimelineMax({ delay: 1, repeat: -1, repeatDelay: 1 });
-document.addEventListener('DOMContentLoaded', () => {
-    const eyeImage = document.querySelector('.eye img');
+// document.addEventListener('DOMContentLoaded', () => {
+//     const eyeImage = document.querySelector('.eye img');
 
-    gsap.to(eyeImage, {
-        duration: 4, // Duration of one rotation cycle in seconds
-        rotation: 360, // Rotate by 360 degrees
-        repeat: -1, // Repeat the animation indefinitely
-        ease: "linear", // Use a linear easing for a smooth, continuous rotation
-        transformOrigin: "center center" // Ensure the rotation is around the center of the image
-    });
-});
+//     gsap.to(eyeImage, {
+//         duration: 4, // Duration of one rotation cycle in seconds
+//         rotation: 360, // Rotate by 360 degrees
+//         repeat: -1, // Repeat the animation indefinitely
+//         ease: "linear", // Use a linear easing for a smooth, continuous rotation
+//         transformOrigin: "center center" // Ensure the rotation is around the center of the image
+//     });
+// });
 
 
 
@@ -47,17 +47,37 @@ timeline
   .add(TweenMax.to(mouth, 0.25, { height: window.innerHeight }))
   .add(TweenMax.to(cloak, 0.5, { y: '-50%' }), 10);
 
-  function startAudio() {
-    var audio = document.getElementById('backgroundAudio');
-    if (audio.paused) {
-        audio.play();
-    }
-    else if(!audio.paused){
-        audio.pause();
-    }
-    // Remove the event listener after the first play
-    // document.body.removeEventListener('click', startAudio);
-}
+//   function startAudio() {
+//     var audio = document.getElementById('backgroundAudio');
+//     if (audio.paused) {
+//         audio.play();
+//     }
+//     else if(!audio.paused){
+//         audio.pause();
+//     }
+//     // Remove the event listener after the first play
+//     // document.body.removeEventListener('click', startAudio);
+// }
 
-// Add event listener for the first user interaction
-document.body.addEventListener('click', startAudio);
+// // Add event listener for the first user interaction
+// document.body.addEventListener('click', startAudio);
+
+document.addEventListener('DOMContentLoaded', function() {
+    var audio = document.getElementById('backgroundAudio');
+
+    // Attempt to play audio
+    var playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(function() {
+            // Autoplay started successfully
+            console.log("Audio is playing");
+        }).catch(function(error) {
+            // Autoplay was prevented.
+            console.log("Autoplay was prevented. Showing fallback UI.");
+            // Show a UI element to let the user manually start playback
+            // Example: A play button that calls audio.play() when clicked
+        });
+    }
+});
+
